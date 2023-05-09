@@ -1,8 +1,17 @@
 class BookmarksController < ApplicationController
+  # these are inherented
+  # before_action(:load_current_user)
+
+  # def load_current_user
+  #   @current_user = User.where({ :id => session[:user_id] }).at(0)
+  # end
+
   def index
     # matching_bookmarks = Bookmark.where({ :user_id => session.fetch(:user_id )})
 
-    @current_user = User.where({ :id => session[:user_id] }).at(0)
+    # @current_user = User.where({ :id => session[:user_id] }).at(0)
+
+    # self.load_current_user
 
     matching_bookmarks = @current_user.bookmarks
 
@@ -43,7 +52,7 @@ class BookmarksController < ApplicationController
 
     if the_bookmark.valid?
       the_bookmark.save
-      redirect_to("/bookmarks/#{the_bookmark.id}", { :notice => "Bookmark updated successfully."} )
+      redirect_to("/bookmarks/#{the_bookmark.id}", { :notice => "Bookmark updated successfully." })
     else
       redirect_to("/bookmarks/#{the_bookmark.id}", { :alert => the_bookmark.errors.full_messages.to_sentence })
     end
@@ -55,6 +64,6 @@ class BookmarksController < ApplicationController
 
     the_bookmark.destroy
 
-    redirect_to("/bookmarks", { :notice => "Bookmark deleted successfully."} )
+    redirect_to("/bookmarks", { :notice => "Bookmark deleted successfully." })
   end
 end
