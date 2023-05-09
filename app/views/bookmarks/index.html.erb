@@ -20,7 +20,17 @@
           User
         </label>
 
-        <input type="text" id="user_id_box" name="query_user_id">
+        <%#input type="text" id="user_id_box" name="query_user_id">%>
+      
+        <select name="query_movie_id">
+          <% Movie.all.order(:title).each do |a_movie| %>
+            <option value="<%= a_movie.id %>">
+            <%= a_movie.title %>
+            </option>
+          <% end %>
+        </select>
+        
+
       </div>
 
       <div>
